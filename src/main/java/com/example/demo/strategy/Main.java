@@ -23,8 +23,8 @@ public class Main {
          * 输出: 3
          * 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
          */
-        System.out.println(lengthOfLongestSubstring1(
-                "abcabcdab"));
+        System.out.println(lengthOfLongestSubstring(
+                "abccdefcgc"));
 
     }
 
@@ -81,13 +81,13 @@ public class Main {
                 // 左指针向右移动一格，移除一个字符
                 occ.remove(s.charAt(i - 1));
             }
-            while (rk + 1 < n && !occ.contains(s.charAt(rk + 1))) {
+            while (rk +1 < n && !occ.contains(s.charAt(rk +1))) {
                 // 不断地移动右指针
-                occ.add(s.charAt(rk + 1));
+                occ.add(s.charAt(rk +1));
                 ++rk;
             }
             // 第 i 到 rk 个字符是一个极长的无重复字符子串
-            ans = Math.max(ans, rk - i + 1);
+            ans = Math.max(ans, rk - i +1);
         }
         return ans;
     }

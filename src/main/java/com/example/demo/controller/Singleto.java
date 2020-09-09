@@ -16,4 +16,17 @@ public class Singleto {
     //外部调用这个方法完成new的操作
     public static Singleto getInstance() {return INSTANCE;}
 
+    public static void main(String[] args) {
+        Integer num = 8448656;
+        String number = String.valueOf(num);
+        int [] x = new int[number.length()];
+
+        for (int i = 0; i < number.length(); i++) {
+            x[i] = Integer.parseInt(String.valueOf(number.charAt(i)));
+        }
+
+        for (int i = 0; i < number.length(); i++) {
+            System.out.println(x[i]+",");
+        }
+    }
 }

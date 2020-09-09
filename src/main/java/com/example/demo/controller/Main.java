@@ -2,9 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Student;
 
+import java.math.BigDecimal;
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class Main {
 
@@ -40,10 +39,61 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        List<Student> list = ExcelTest();
-        Map<Double, List<Student>> collect = list.stream().collect(Collectors.groupingBy(student -> student.getAge()));
-        collect.keySet().forEach(key-> System.out.println("map.get( "+key+" ) = "+collect.get(key)));
+//        List<Student> list = ExcelTest();
+//        Map<Double, List<Student>> collect = list.stream().collect(Collectors.groupingBy(student -> student.getAge()));
+//        collect.keySet().forEach(key-> System.out.println("map.get( "+key+" ) = "+collect.get(key)));
+//        String sm = "1234546545,78978978";
+//        String[] split = sm.split(",");
+//        for (int i = 0; i <split.length ; i++) {
+//            System.out.println(split[i]+"-------------------");
+//        }
+
+        List<Map<String, Integer>> list = new ArrayList<>();
+        Map<String, Integer> map = new HashMap<>();
+        map.put("dsd",120);
+        map.put("dsd1",120);
+        map.put("dsd2",120);
+        map.put("dsd3",120);
+
+        Map<String, Integer> map1 = new HashMap<>();
+        map1.put("dsd1",1120);
+        map1.put("dsd11",1120);
+        map1.put("dsd12",1120);
+        map1.put("dsd13",1120);
+
+        Map<String, Integer> map2 = new HashMap<>();
+        map2.put("dsd21",2120);
+        map2.put("dsd211",2120);
+        map2.put("dsd212",2120);
+        map2.put("dsd213",2120);
+
+        list.add(map);
+        list.add(map1);
+        list.add(map2);
+
+        list.forEach(stringIntegerMap -> {
+            System.out.println(stringIntegerMap);
+        });
+
+
+        List<String>  l= new ArrayList<>();
+        l.add("4564151");
+        l.add("4564151");
+        l.add("4564151");
+        l.add("4564151");
+        l.add("4564151");
+
+        System.out.println(l.toString());
     }
+
+
+
+
+
+
+
+
+
 
 
 }

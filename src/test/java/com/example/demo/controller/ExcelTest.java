@@ -4,10 +4,13 @@ import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Head;
 import com.alibaba.excel.write.ExcelBuilder;
+import com.alibaba.excel.write.builder.ExcelWriterBuilder;
+import com.alibaba.excel.write.builder.ExcelWriterSheetBuilder;
 import com.alibaba.excel.write.builder.ExcelWriterTableBuilder;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.alibaba.excel.write.metadata.WriteTable;
 import com.example.demo.entity.ImageData;
+import com.example.demo.entity.JSExportVo;
 import com.example.demo.entity.Student;
 import com.example.demo.entity.StudentDto;
 import org.apache.catalina.User;
@@ -275,5 +278,22 @@ public class ExcelTest {
             list.add(data);
         }
         return list;
+    }
+
+    /**
+     * 使用模板导出
+     */
+    @Test
+    public void test010(){
+
+
+        String fileName = "fileMs.xlsx";
+        JSExportVo jsExportVo = new JSExportVo();
+        jsExportVo.setDoBoxTime("时代峻峰很快就");
+        ExcelWriter build = EasyExcel.write("模板填充.xlsx", JSExportVo.class).build();
+        WriteSheet build1 = EasyExcel.writerSheet("").build();
+
+
+        EasyExcel.write("模板填充.xlsx", JSExportVo.class).withTemplate(fileName).sheet("").doFill(jsExportVo);
     }
 }
