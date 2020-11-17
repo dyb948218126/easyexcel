@@ -7,13 +7,11 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Car implements Serializable {
+@AllArgsConstructor
+public class Posts implements Serializable {
 
+    private String id;
     private String name;
-
-    private Integer price;
-
-    private String address;
+    private String age;
 }

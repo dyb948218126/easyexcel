@@ -6,15 +6,17 @@ package com.example.demo.controller;
  */
 public enum  Singleto1 {
 
-    INSTANCE;
+//    INSTANCE;
+//
+//    public void m(){}
+//
+//    public static void main(String[] args) {
+//        for (int i = 0; i <100 ; i++) {
+//            new Thread(() ->{
+//                System.out.println(Singleto1.INSTANCE.hashCode());
+//            }).start();
+//        }
+//    }
 
-    public void m(){}
 
-    public static void main(String[] args) {
-        for (int i = 0; i <100 ; i++) {
-            new Thread(() ->{
-                System.out.println(Singleto1.INSTANCE.hashCode());
-            }).start();
-        }
-    }
 }

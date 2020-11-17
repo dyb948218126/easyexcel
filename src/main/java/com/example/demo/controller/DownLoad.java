@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,5 +36,18 @@ public class DownLoad {
         String fileName = URLEncoder.encode("测试","utf-8");
         response.setHeader("Content-disposition","attachment;filename=" + fileName + ".xlsx");
         EasyExcel.write(response.getOutputStream(), Student.class).sheet("模板").doWrite(ExcelTest());
+    }
+
+    public static void main(String[] args) {
+            //下边这组大括号非常重要
+            List<String> list = new ArrayList<String>() {};
+            System.out.println(getActualType(list,0));
+
+        }
+
+        public static String getActualType(Object o,int index) {
+            Type clazz = o.getClass().getGenericSuperclass();
+            ParameterizedType pt = (ParameterizedType)clazz;
+            return pt.getActualTypeArguments()[index].toString();
     }
 }
