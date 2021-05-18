@@ -1,8 +1,11 @@
 package com.example.demo.controller;
 
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.date.CalendarUtil;
 import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.date.LocalDateTimeUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.XmlUtil;
 import cn.hutool.http.webservice.SoapClient;
 import cn.hutool.http.webservice.SoapUtil;
@@ -13,12 +16,18 @@ import com.example.demo.entity.Car;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.StringUtils;
 import org.w3c.dom.Document;
 
 import javax.xml.xpath.XPathConstants;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Slf4j
@@ -86,23 +95,70 @@ public class DateTest {
 //    }
 
 
-        SoapClient client = SoapClient.create("http://180.166.220.23:8282/S_KJJK/SmartLink.asmx")
-                // 设置要请求的方法，此接口方法前缀为web，传入对应的命名空间
-                .setMethod("SELECT_GeneralGoodsTransportWorkFlowStatus", "http://smartlink.org/")
-                .setParam("datejson", null);
-        String send = client.send(true);
-        //System.out.println(send);
-        Document docResult = XmlUtil.readXML(send);
-        //结果
-        Object value = XmlUtil.getByXPath("//soap:Envelope", docResult, XPathConstants.STRING);
-        //接收返回值
-        String result = Convert.toStr(value).trim();
+//        SoapClient client = SoapClient.create("http://180.166.220.23:8282/S_KJJK/SmartLink.asmx")
+//                // 设置要请求的方法，此接口方法前缀为web，传入对应的命名空间
+//                .setMethod("SELECT_GeneralGoodsTransportWorkFlowStatus", "http://smartlink.org/")
+//                .setParam("datejson", null);
+//        String send = client.send(true);
+//        //System.out.println(send);
+//        Document docResult = XmlUtil.readXML(send);
+//        //结果
+//        Object value = XmlUtil.getByXPath("//soap:Envelope", docResult, XPathConstants.STRING);
+//        //接收返回值
+//        String result = Convert.toStr(value).trim();
+//
+//        System.out.println(result);
 
-        System.out.println(result);
+        String dateStr = "2021-01-11 08:45:55";
+        LocalDateTime localDateTime = parseStringToDateTime(dateStr);
 
+        DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar=Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY,-24);
+        Calendar calendar1=Calendar.getInstance();
+        calendar1.set(Calendar.HOUR_OF_DAY,24);
+        Calendar calendar2=Calendar.getInstance();
+        calendar2.set(Calendar.HOUR_OF_DAY,0);
 
+        System.out.println(dateFormat.format(calendar.getTime()));
+        System.out.println(dateFormat.format(calendar1.getTime()));
+        System.out.println(dateFormat.format(calendar2.getTime()));
 
+        List<Object> objectList = Collections.synchronizedList(new LinkedList<>());
+        Deque<Integer> stack = new ArrayDeque<>();
+        stack.push(1);
+        stack.push(12);
+        stack.push(13);
+        stack.push(14);
+        stack.push(15);
+        stack.push(16);
+        for (Integer integer : stack) {
+            System.out.println(integer);
+        }
+        stack.pop();
+        System.out.println(stack);
+        stack.pollLast();
+        System.out.println(stack);
+
+        SortedSet<Object> sortedSet = Collections.synchronizedSortedSet(new TreeSet<>());
+        for (int i = 0; i < 1000; i++) {
+            sortedSet.add(i);
+        }
+
+        PriorityQueue priorityQueue = new PriorityQueue();
+        for (int i = 0; i < 1000; i++) {
+            priorityQueue.add(i);
+        }
+
+        priorityQueue.forEach(System.out::println);
 
     }
 
+    public static LocalDateTime parseStringToDateTime(String time) {
+        if (StrUtil.isBlank(time)){
+            return null;
+        }
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return LocalDateTime.parse(time, df);
+    }
 }

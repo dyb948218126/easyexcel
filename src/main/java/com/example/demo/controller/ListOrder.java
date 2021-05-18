@@ -3,10 +3,8 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Posts;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author cx.hao
@@ -78,6 +76,10 @@ public class ListOrder {
         targetList.add(post8);
         targetList.add(post9);
         targetList.add(post10);
+
+        ArrayList<Posts> collect = targetList.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<Posts>(Comparator.comparing(posts -> posts.getId()))), ArrayList::new));
+        System.out.println(collect.size());
+        System.out.println(collect);
         System.out.println("排列前的数据：");
         targetList.forEach(t -> System.out.print(t.getId() + t.getName() + "~" + t.getAge() + "  "));
         System.out.println();
